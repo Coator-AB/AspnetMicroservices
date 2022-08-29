@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.0-preview.7.22376.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta1" />
@@ -21,6 +23,10 @@
     <Protobuf Include="..\..\discount\Discount.Grpc\Protos\discount.proto" GrpcServices="Client">
       <Link>Protos\discount.proto</Link>
     </Protobuf>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\buildingBlocks\EventBus.Messages\EventBus.Messages.csproj" />
   </ItemGroup>
 
 </Project>

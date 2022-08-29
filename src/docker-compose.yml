@@ -10,8 +10,10 @@ services:
   discountdb:
     image: postgres
     
+  #image: mcr.microsoft.com/mssql/server:2017-latest
   orderdb:
-    image: mcr.microsoft.com/mssql/server:2017-latest
+    image: mcr.microsoft.com/azure-sql-edge
+    
     
   rabbitmq:
     image: rabbitmq:3-management-alpine

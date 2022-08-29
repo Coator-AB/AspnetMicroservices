@@ -10,7 +10,7 @@ public class OrderContext : DbContext
     {
     }
     
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<Order> Orders { get; set; } = null!;
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {

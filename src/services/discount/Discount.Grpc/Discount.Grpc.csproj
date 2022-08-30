@@ -25,4 +25,8 @@
       <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\buildingBlocks\Common.Logging\Common.Logging.csproj" />
+    </ItemGroup>
+
 </Project>

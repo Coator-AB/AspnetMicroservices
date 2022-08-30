@@ -19,4 +19,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\buildingBlocks\Common.Logging\Common.Logging.csproj" />
+  </ItemGroup>
+
 </Project>

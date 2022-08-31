@@ -2,7 +2,10 @@ using Basket.API.GrpcServices;
 using Basket.API.Repositories;
 using Common.Logging;
 using Discount.Grpc.Protos;
+using HealthChecks.UI.Client;
 using MassTransit;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHealthChecks()
+    .AddRedis(builder.Configuration["CacheSettings:ConnectionString"], "Redis Health",
+        HealthStatus.Degraded);
 
 // Redis Configuration
 builder.Services.AddStackExchangeRedisCache(options =>
@@ -54,5 +61,10 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/hc", new HealthCheckOptions
+{
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();

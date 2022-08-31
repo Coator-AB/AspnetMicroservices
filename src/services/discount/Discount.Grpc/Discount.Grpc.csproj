@@ -19,6 +19,7 @@
         <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
         <PackageReference Include="Npgsql" Version="7.0.0-preview.7" />
+        <PackageReference Include="Polly" Version="7.2.3" />
     </ItemGroup>
 
     <ItemGroup>

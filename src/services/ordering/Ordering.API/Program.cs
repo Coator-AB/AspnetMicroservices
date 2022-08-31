@@ -1,6 +1,8 @@
 using Common.Logging;
 using EventBus.Messages.Common;
+using HealthChecks.UI.Client;
 using MassTransit;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Ordering.API.EventBusConsumers;
 using Ordering.API.Extensions;
 using Ordering.Application;
@@ -17,6 +19,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<OrderContext>();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfraStructureServices(builder.Configuration);
@@ -54,6 +58,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/hc", new HealthCheckOptions
+{
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.MigrateDatabase<OrderContext>((context, service) =>
 {
